@@ -4,11 +4,13 @@ import trollFaceLogo from '../images/troll-face.png'
 function Header() {
   return (
     <header>
-    <img 
-        src={trollFaceLogo} alt="troll face logo" 
-        class="troll-face-logo"     
-    />
-    <div class='header--text'>MEME GENERATOR</div>
+        <div className="header--content-container">
+            <img 
+                src={trollFaceLogo} alt="troll face logo" 
+                className="troll-face-logo"     
+            />
+            <div className='header--text'>MEME GENERATOR <span className="header--text-version-nr">v1</span></div>
+        </div>
     </header>
   )
 }

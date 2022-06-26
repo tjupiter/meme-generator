@@ -4,3 +4,138 @@ main {
     flex-direction: column;
     align-items: center;
 }
+
+/* INPUT FORM */
+
+.form--input-texts-container {
+    display: flex;
+    flex-direction: column;
+    /* gap: 5rem; */
+}
+
+.form--input-container {
+    margin-bottom: .5rem;
+}
+
+.form--input-container input {
+    display: block;
+    padding: .2rem .3rem;
+    margin-top: .2rem;
+}
+
+form button {
+    width: 100%;
+    background-color: blueviolet;
+    color: white;
+    font-weight: bold;
+    padding: .4rem 0;
+    margin-top: .3rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: rgb(88, 59, 115);
+}
+
+/* MEME IMAGE */
+
+.meme-image-container {
+    margin: 1rem auto;
+    position: relative;
+}
+
+.meme-image--text {
+    position: absolute;
+    width: 100%;
+    margin-left: auto;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    color: white;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.meme-image--text-top {
+    top: 1rem;
+}
+
+.meme-image--text-bottom {
+    bottom: 1rem;
+}
+
+.meme-image {
+    width: 100%;
+}
+
+/* WHATS NEXT SECTION */
+
+.whats-next {
+    width: 100%;
+    margin: 1rem auto;
+}
+
+.whats-next button{
+    display: block;
+    width: 50%;
+    background-color: blueviolet;
+    color: white;
+    font-weight: bold;
+    padding: .4rem 0;
+    margin: 0 auto;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.whats-next button:hover {
+    background-color: rgb(88, 59, 115);
+}
+
+.whats-next--info {
+    margin: 1rem auto;
+    max-width: 50%;
+}
+
+.whats-next--info ul {
+    list-style-position: inside;
+    list-style-type:square;
+    display: table;
+    padding-left: 0.2rem;
+}
+
+.whats-next--info ul > li {
+    display: table-row;
+}
+
+.whats-next--info ul > li::before {
+    content: '-';
+    display: table-cell; 
+    text-align: right;
+    padding-right: 0.2rem;
+}
+
+.whats-next--info h2 {
+    font-size: 1.2rem;
+    margin-bottom: .2rem;
+}
+
+@media screen and (min-width: 800px) {
+    main {
+        margin-top: 2rem;
+    }
+
+    .form--input-texts-container {
+    flex-direction: row;
+    gap: 2rem;
+    font-weight: bolder;
+    font-size: 1.2rem;
+    }
+
+    .whats-next {
+        width: 50%;
+    }
+}

@@ -1,10 +1,17 @@
 header {
     background-color: rgb(84, 0, 133);
+    
+    
+   
+    font-family: 'Orbitron', sans-serif;
+}
+.header--content-container{
     height: 10vh;
     display: flex;
     align-items: center;
     padding: 1rem;
-    font-family: 'Orbitron', sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .troll-face-logo {
@@ -16,3 +23,10 @@ header {
     color: white;
     letter-spacing: 1px;;
 }
+
+.header--text-version-nr {
+    font-size: .6rem;
+    display: block;
+    text-align: right;
+}
+
