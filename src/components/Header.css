@@ -1,0 +1,18 @@
+header {
+    background-color: rgb(84, 0, 133);
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.troll-face-logo {
+    height: 100%;
+    margin-right: auto;
+}
+
+.header--text {
+    color: white;
+    letter-spacing: 1px;;
+}
