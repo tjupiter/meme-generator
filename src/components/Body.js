@@ -135,7 +135,6 @@ function Body() {
     function getUserMeme(url) {
       window.open(url, '_blank').focus();
     }
-    console.log(options)
     fetch('https://api.imgflip.com/caption_image', options)
       .then(res => res.json())
       .then(data =>getUserMeme(data.data.url))
