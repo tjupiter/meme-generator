@@ -1,11 +1,41 @@
+/* GENERAL */
+
 main {
     padding: 1rem .5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: rgb(216, 206, 237);
+    min-height: 90vh;
+}
+
+.button {
+    background-color: blueviolet;
+    color: white;
+    font-weight: bold;
+    padding: .4rem 0;
+    border-radius: 5px;
+    border: 2px solid blueviolet;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: rgb(88, 59, 115);
+}
+
+.button:focus {
+    outline: none;
+    background-color: rgb(88, 59, 115);
+    border: 2px solid white;
+    color: rgb(230, 215, 245);
 }
 
 /* INPUT FORM */
+
+form {
+    width: 100%;
+    padding: 0 1rem;
+}
 
 .form--input-texts-container {
     display: flex;
@@ -14,29 +44,32 @@ main {
 }
 
 .form--input-container {
-    margin-bottom: .5rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.form--input-container label {
+    width: 40%;
+    font-weight: 800;
 }
 
 .form--input-container input {
+    width: 60%;
     display: block;
-    padding: .2rem .3rem;
+    padding: .3rem .5rem;
     margin-top: .2rem;
+    border-radius: 5px;
+    border: 1px solid white;
+}
+
+.form--input-container input:focus {
+    outline: none;
+    border: blueviolet 1px solid;
 }
 
 form button {
     width: 100%;
-    background-color: blueviolet;
-    color: white;
-    font-weight: bold;
-    padding: .4rem 0;
-    margin-top: .3rem;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-}
-
-form button:hover {
-    background-color: rgb(88, 59, 115);
 }
 
 /* MEME IMAGE */
@@ -71,60 +104,38 @@ form button:hover {
     width: 100%;
 }
 
-/* WHATS NEXT SECTION */
+/* MEME BUTTONS */
 
-.whats-next {
+.meme-button-container {
     width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
     /* margin: 1rem auto; */
 }
 
-.whats-next button{
-    display: block;
-    width: 50%;
-    background-color: blueviolet;
-    color: white;
-    font-weight: bold;
-    padding: .4rem 0;
-    margin: 0 auto;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    margin-bottom: 1rem;
+.meme-button-container button {
+    width: 40%;
 }
 
-.whats-next button:hover {
-    background-color: rgb(88, 59, 115);
-}
 
-.whats-next--info {
-    margin: 1rem auto;
-    max-width: 50%;
-}
-
-.whats-next--info ul {
-    list-style-position: inside;
-    list-style-type:square;
-    display: table;
-    padding-left: 0.2rem;
-}
-
-.whats-next--info ul > li {
-    display: table-row;
-}
-
-.whats-next--info ul > li::before {
-    content: '-';
-    display: table-cell; 
-    text-align: right;
-    padding-right: 0.2rem;
-}
-
-.whats-next--info h2 {
-    font-size: 1.2rem;
-    margin-bottom: .2rem;
-}
 
 @media screen and (min-width: 800px) {
+
+    .button {
+        font-size: 1rem;
+    }
+
+    form {
+        width: 600px;
+    }
+
+    .form--input-texts-container {
+        flex-direction: column;
+        gap: 0;
+        font-size: 1.2rem;
+    }
+
     .meme-image-container {
         height: 60vh;
     }
@@ -133,14 +144,7 @@ form button:hover {
         height: 100%;
     }
 
-    .form--input-texts-container {
-    flex-direction: row;
-    gap: 2rem;
-    font-weight: bolder;
-    font-size: 1.2rem;
-    }
-
-    .whats-next {
+    .meme-button-container {
         width: 50%;
     }
 }

@@ -27,10 +27,12 @@ function Body() {
       setAllMemes(result.data.memes)
       const imageUrl = await result.data.memes[2].url
       const imageTempId = await result.data.memes[2].id
+      const imageAlt = await result.data.memes[2].name
       setMeme(prevMeme => ({
         ...prevMeme,
         imageUrl: imageUrl,
-        memeId: imageTempId
+        memeId: imageTempId,
+        imageAlt: imageAlt
       }))
     }
     fetchData()
@@ -48,7 +50,8 @@ function Body() {
     topText: 'TOP TEXT',
     bottomText: 'BOTTOM TEXT',
     imageUrl: '',
-    memeId: ''
+    memeId: '',
+    imageAlt: ''
   })
 
   function handleInputTextChange(event) {
@@ -76,24 +79,20 @@ function Body() {
     const randomNumber = Math.floor(Math.random() * allMemes.length)
     const randomUrl = allMemes[randomNumber].url
     const memeId = allMemes[randomNumber].id
+    const imageAlt = allMemes[randomNumber].name
     setMeme(prevMeme => ({
       ...prevMeme,
       imageUrl: randomUrl,
-      memeId: memeId
+      memeId: memeId,
+      imageAlt: imageAlt,
     }))
-  }
-
-  const [whatsNextToShow, setWhatsNextToShow] = useState(false)
-  function toggleWhatsNext() {
-    setWhatsNextToShow(!whatsNextToShow)
   }
 
   // ===============
   // POST MEME IMAGE
   // ===============
 
-  function postMemeImage() {
-
+  async function postMemeImage() {
     // const text1 = {
     //     "text": `${meme.topText}`,
     //     "x": 10,
@@ -132,25 +131,50 @@ function Body() {
       body: params,
     };
 
-    function getUserMeme(url) {
-      window.open(url, '_blank').focus();
-    }
-    fetch('https://api.imgflip.com/caption_image', options)
-      .then(res => res.json())
-      .then(data =>getUserMeme(data.data.url))
+    const res = await fetch('https://api.imgflip.com/caption_image', options)
+    const data = await res.json()
+
+    // this url will be used in the functions below
+    return data.data.url
   }
+
+  async function openMeme() {
+    const userMemeUrl = await postMemeImage()
+    window.open(userMemeUrl, '_blank').focus();
+  }
+
+  async function downloadMeme() {
+    const userMemeUrl = await postMemeImage()
+
+    fetch(userMemeUrl)
+      .then(resp => resp.blob())
+      .then(blobobject => {
+        const blob = window.URL.createObjectURL(blobobject);
+        const fileName = userMemeUrl.split('/').pop();
+        const anchor = document.createElement('a');
+        anchor.style.display = 'none';
+        anchor.href = blob;
+        anchor.download = fileName;
+        document.body.appendChild(anchor);
+        anchor.click();
+        window.URL.revokeObjectURL(blob);
+      })
+      .catch(() => console.log('An error in downloadin gthe file sorry'));
+  }
+
   return (
     <main>
       <form>
         <div className="form--input-texts-container">
+
           <div className="form--input-container">
-            <label htmlFor="from--top-text">
+            <label htmlFor="form--top-text">
               TOP TEXT
             </label>
             <input
               type="text"
               name="topText"
-              id="from--top-text"
+              id="form--top-text"
               value={meme.topText}
               onChange={handleInputTextChange}
               onFocus={onFocusInputField}
@@ -158,11 +182,11 @@ function Body() {
           </div>
   
           <div className="form--input-container">
-            <label htmlFor="from--top-text">BOTTOM TEXT</label>
+            <label htmlFor="form--top-text">BOTTOM TEXT</label>
             <input
               type="text"
               name="bottomText"
-              id="from--bottom-text"
+              id="form--bottom-text"
               value={meme.bottomText}
               onChange={handleInputTextChange}
               onFocus={onFocusInputField}
@@ -170,7 +194,7 @@ function Body() {
           </div>
         </div>
 
-        <button onClick={getNewMemeImage}>Get New Image</button>
+        <button onClick={getNewMemeImage} className="button">Get New Image</button>
       </form>
 
       { allMemes.length > 0 && 
@@ -184,26 +208,15 @@ function Body() {
 
           <img 
             src={meme.imageUrl}
-            alt="meme caption"
+            alt={meme.imageAlt}
             className="meme-image"
             />
         </section>
       }
 
-      <section className="whats-next">
-        <button onClick={postMemeImage}>Get Meme</button>
-        <button onClick={toggleWhatsNext}>What's next?</button>
-
-        { whatsNextToShow && 
-          <div className='whats-next--info'>
-            <h2>You'll be able to:</h2>
-            <ul>
-              <li>position texts</li>
-              <li>change text color and size</li>
-              <li>save/send your final meme</li>
-            </ul>
-          </div>
-        }
+      <section className="meme-button-container">
+        <button onClick={openMeme} className="button">Open Meme</button>
+        <button onClick={downloadMeme} className="button">Download Meme</button>
       </section>
     </main>
   )
